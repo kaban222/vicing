@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль и настройки - Казино</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a3a, #0d1520);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #ffd700;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .sidebar {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #ffd700;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .content {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 30px;
+            border: 2px solid #ffd700;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h2 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: #0d1520;
+            margin-right: 20px;
+            border: 3px solid #fff;
+        }
+
+        .profile-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: #ccc;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-card h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffd700;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(145deg, #ffd700, #ffaa00);
+            color: #0d1520;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #ffd700;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .history-table th, .history-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .history-table th {
+            color: #ffd700;
+        }
+
+        .status-win {
+            color: #2ecc71;
+        }
+
+        .status-lose {
+            color: #e74c3c;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #1a2a3a;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid #ffd700;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                margin-bottom: 20px;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">CASINO VICING</div>
+            <nav class="nav-menu">
+                <a href="#">Игры</a>
+                <a href="#" class="active">Профиль</a>
+                <a href="#">Поддержка</a>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active" data-section="profile">Профиль</a></li>
+                    <li><a href="#" data-section="edit-profile">Редактировать профиль</a></li>
+                    <li><a href="#" data-section="game-settings">Настройки игры</a></li>
+                    <li><a href="#" data-section="account-settings">Настройки аккаунта</a></li>
+                    <li><a href="#" data-section="history">История игр</a></li>
+                    <li><a href="#" data-section="security">Безопасность</a></li>
+                </ul>
+            </aside>
+
+            <main class="content">
+                <!-- Профиль -->
+                <section id="profile" class="section active">
+                    <h2>Мой профиль</h2>
+                    <div class="profile-header">
+                        <div class="avatar">ИИ</div>
+                        <div class="profile-info">
+                            <h3>Иван Иванов</h3>
+                            <p>VIP игрок</p>
+                            <p>На сайте с: 15.03.2022</p>
+                        </div>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat-card">
+                            <h4>Баланс</h4>
+                            <div class="value">15,750 ₽</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Выиграно</h4>
+                            <div class="value">125,400 ₽</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Игр сыграно</h4>
+                            <div class="value">1,247</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Уровень</h4>
+                            <div class="value">Золотой</div>
+                        </div>
+                    </div>
+
+                    <h3>Последние игры</h3>
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Игра</th>
+                                <th>Дата</th>
+                                <th>Ставка</th>
+                                <th>Результат</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Слоты "Золото Ацтеков"</td>
+                                <td>10.11.2023 18:45</td>
+                                <td>500 ₽</td>
+                                <td class="status-win">+2,500 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Рулетка</td>
+                                <td>10.11.2023 16:20</td>
+                                <td>1,000 ₽</td>
+                                <td class="status-lose">-1,000 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Блэкджек</td>
+                                <td>09.11.2023 22:15</td>
+                                <td>750 ₽</td>
+                                <td class="status-win">+1,500 ₽</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Редактирование профиля -->
+                <section id="edit-profile" class="section">
+                    <h2>Редактирование профиля</h2>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" class="form-control" value="Иван">
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Фамилия</label>
+                            <input type="text" id="surname" class="form-control" value="Иванов">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" value="ivan@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" class="form-control" value="+7 (900) 123-45-67">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthdate">Дата рождения</label>
+                            <input type="date" id="birthdate" class="form-control" value="1990-05-15">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Страна</label>
+                            <select id="country" class="form-control">
+                                <option value="ru">Россия</option>
+                                <option value="kz">Казахстан</option>
+                                <option value="by">Беларусь</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Сохранить изменения</button>
+                    </form>
+                </section>
+
+                <!-- Настройки игры -->
+                <section id="game-settings" class="section">
+                    <h2>Настройки игры</h2>
+                    <div class="toggle-group">
+                        <span>Звуковые эффекты</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-group">
+                        <span>Фоновная музыка</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-group">
+                        <span>Автоматическая игра</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-group">
+                        <span>Быстрая игра</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-group">
+                        <span>Уведомления о бонусах</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Лимиты</h3>
+                    <div class="form-group">
+                        <label for="daily-limit">Дневной лимит потерь</label>
+                        <input type="number" id="daily-limit" class="form-control" value="5000">
+                    </div>
+                    <div class="form-group">
+                        <label for="session-limit">Лимит на сессию</label>
+                        <input type="number" id="session-limit" class="form-control" value="1000">
+                    </div>
+                    
+                    <button class="btn">Сохранить настройки</button>
+                </section>
+
+                <!-- Настройки аккаунта -->
+                <section id="account-settings" class="section">
+                    <h2>Настройки аккаунта</h2>
+                    <div class="toggle-group">
+                        <span>Email-рассылка</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-group">
+                        <span>SMS-уведомления</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-group">
+                        <span>Уведомления в браузере</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Язык и валюта</h3>
+                    <div class="form-group">
+                        <label for="language">Язык интерфейса</label>
+                        <select id="language" class="form-control">
+                            <option value="ru">Русский</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="currency">Валюта счета</label>
+                        <select id="currency" class="form-control">
+                            <option value="rub">Рубли (RUB)</option>
+                            <option value="usd">Доллары (USD)</option>
+                            <option value="eur">Евро (EUR)</option>
+                        </select>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Управление аккаунтом</h3>
+                    <button class="btn btn-secondary" style="margin-right: 10px;">Экспорт данных</button>
+                    <button class="btn btn-danger" id="delete-account">Удалить аккаунт</button>
+                </section>
+
+                <!-- История игр -->
+                <section id="history" class="section">
+                    <h2>История игр</h2>
+                    <div class="form-group">
+                        <label for="history-filter">Фильтр по играм</label>
+                        <select id="history-filter" class="form-control">
+                            <option value="all">Все игры</option>
+                            <option value="slots">Слоты</option>
+                            <option value="roulette">Рулетка</option>
+                            <option value="blackjack">Блэкджек</option>
+                            <option value="poker">Покер</option>
+                        </select>
+                    </div>
+                    
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Игра</th>
+                                <th>Дата и время</th>
+                                <th>Ставка</th>
+                                <th>Выигрыш</th>
+                                <th>Результат</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Слоты "Книга Ра"</td>
+                                <td>10.11.2023 18:45</td>
+                                <td>500 ₽</td>
+                                <td>2,500 ₽</td>
+                                <td class="status-win">Победа</td>
+                            </tr>
+                            <tr>
+                                <td>Европейская рулетка</td>
+                                <td>10.11.2023 16:20</td>
+                                <td>1,000 ₽</td>
+                                <td>0 ₽</td>
+                                <td class="status-lose">Проигрыш</td>
+                            </tr>
+                            <tr>
+                                <td>Блэкджек</td>
+                                <td>09.11.2023 22:15</td>
+                                <td>750 ₽</td>
+                                <td>1,500 ₽</td>
+                                <td class="status-win">Победа</td>
+                            </tr>
+                            <tr>
+                                <td>Слоты "Фрукты"</td>
+                                <td>09.11.2023 20:30</td>
+                                <td>200 ₽</td>
+                                <td>0 ₽</td>
+                                <td class="status-lose">Проигрыш</td>
+                            </tr>
+                            <tr>
+                                <td>Видеопокер</td>
+                                <td>08.11.2023 19:10</td>
+                                <td>300 ₽</td>
+                                <td>600 ₽</td>
+                                <td class="status-win">Победа</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Безопасность -->
+                <section id="security" class="section">
+                    <h2>Безопасность</h2>
+                    <h3>Смена пароля</h3>
+                    <form id="password-form">
+                        <div class="form-group">
+                            <label for="current-password">Текущий пароль</label>
+                            <input type="password" id="current-password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">Новый пароль</label>
+                            <input type="password" id="new-password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Подтвердите новый пароль</label>
+                            <input type="password" id="confirm-password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn">Сменить пароль</button>
+                    </form>
+                    
+                    <h3 style="margin-top: 30px;">Двухфакторная аутентификация</h3>
+                    <div class="toggle-group">
+                        <span>Включить 2FA</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p style="margin-top: 10px; color: #ccc; font-size: 0.9rem;">
+                        Двухфакторная аутентификация добавляет дополнительный уровень безопасности к вашему аккаунту.
+                    </p>
+                    
+                    <h3 style="margin-top: 30px;">Активные сессии</h3>
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Устройство</th>
+                                <th>Местоположение</th>
+                                <th>Последняя активность</th>
+                                <th>Действие</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Chrome, Windows</td>
+                                <td>Москва, Россия</td>
+                                <td>10.11.2023 18:45</td>
+                                <td><button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.8rem;">Завершить</button></td>
+                            </tr>
+                            <tr>
+                                <td>Safari, iPhone</td>
+                                <td>Санкт-Петербург, Россия</td>
+                                <td>09.11.2023 14:20</td>
+                                <td><button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.8rem;">Завершить</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+
+        <footer>
+            <p>© 2023 Casino VICING. Все права защищены. Играйте ответственно. 18+</p>
+        </footer>
+    </div>
+
+    <!-- Модальное окно подтверждения удаления аккаунта -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <h2>Подтверждение удаления аккаунта</h2>
+            <p>Вы уверены, что хотите удалить свой аккаунт? Это действие невозможно отменить, и все ваши данные будут безвозвратно удалены.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="cancel-delete">Отмена</button>
+                <button class="btn btn-danger" id="confirm-delete">Удалить аккаунт</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Переключение между разделами
+            const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+            const sections = document.querySelectorAll('.section');
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Убираем активный класс у всех ссылок
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    // Добавляем активный класс к текущей ссылке
+                    this.classList.add('active');
+                    
+                    // Скрываем все разделы
+                    sections.forEach(section => section.classList.remove('active'));
+                    
+                    // Показываем выбранный раздел
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+            
+            // Обработка формы профиля
+            const profileForm = document.getElementById('profile-form');
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Изменения профиля сохранены!');
+                });
+            }
+            
+            // Обработка формы смены пароля
+            const passwordForm = document.getElementById('password-form');
+            if (passwordForm) {
+                passwordForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const newPassword = document.getElementById('new-password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+                    
+                    if (newPassword !== confirmPassword) {
+                        alert('Пароли не совпадают!');
+                        return;
+                    }
+                    
+                    if (newPassword.length < 6) {
+                        alert('Пароль должен содержать не менее 6 символов!');
+                        return;
+                    }
+                    
+                    alert('Пароль успешно изменен!');
+                    passwordForm.reset();
+                });
+            }
+            
+            // Модальное окно удаления аккаунта
+            const deleteAccountBtn = document.getElementById('delete-account');
+            const deleteModal = document.getElementById('delete-modal');
+            const cancelDeleteBtn = document.getElementById('cancel-delete');
+            const confirmDeleteBtn = document.getElementById('confirm-delete');
+            
+            if (deleteAccountBtn) {
+                deleteAccountBtn.addEventListener('click', function() {
+                    deleteModal.style.display = 'flex';
+                });
+            }
+            
+            if (cancelDeleteBtn) {
+                cancelDeleteBtn.addEventListener('click', function() {
+                    deleteModal.style.display = 'none';
+                });
+            }
+            
+            if (confirmDeleteBtn) {
+                confirmDeleteBtn.addEventListener('click', function() {
+                    alert('Аккаунт удален! (в реальном приложении здесь был бы запрос на сервер)');
+                    deleteModal.style.display = 'none';
+                });
+            }
+            
+            // Закрытие модального окна при клике вне его
+            window.addEventListener('click', function(e) {
+                if (e.target === deleteModal) {
+                    deleteModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

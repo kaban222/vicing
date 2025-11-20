@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VICING Casino - Главная</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 15, 35, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .user-panel {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .balance {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .balance i {
+            color: #4caf50;
+        }
+
+        .profile-btn, .deposit-btn {
+            background: linear-gradient(45deg, #ffd700, #ffaa00);
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-btn:hover, .deposit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background: url("static/waterfall.jpg") no-repeat center center;
+            background-size: cover;
+            position: relative;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 35, 0.7);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .bonus-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.5);
+        }
+
+        /* Games Section */
+        .games-section {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #ffd700;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .game-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .game-content {
+            padding: 20px;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .game-description {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .play-btn {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .play-btn:hover {
+            background: linear-gradient(45deg, #66bb6a, #388e3c);
+            transform: translateY(-3px);
+        }
+
+        /* Profile Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ffd700;
+            font-size: 1.8rem;
+        }
+
+        .profile-info {
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-label {
+            color: #e0e0e0;
+        }
+
+        .info-value {
+            font-weight: bold;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        /* Deposit Modal */
+        .deposit-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .deposit-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .deposit-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .deposit-option.selected {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+        }
+
+        .deposit-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .deposit-bonus {
+            font-size: 0.8rem;
+            color: #4caf50;
+        }
+
+        .custom-amount {
+            margin-bottom: 25px;
+        }
+
+        .custom-amount input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(45deg, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .confirm-btn:hover {
+            background: linear-gradient(45deg, #66bb6a, #388e3c);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 15, 35, 0.9);
+            padding: 30px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            margin: 15px 0;
+        }
+
+        .footer-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+
+        .age-warning {
+            font-size: 0.8rem;
+            color: #aaa;
+            max-width: 600px;
+            margin-top: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .deposit-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-crown"></i>
+                    <h1>VICING CASINO</h1>
+                </div>
+                <div class="user-panel">
+                    <div class="balance">
+                        <i class="fas fa-coins"></i>
+                        <span id="userBalance">5 000 ₽</span>
+                    </div>
+                    <button class="deposit-btn" id="openDeposit">
+                        <i class="fas fa-wallet"></i> Пополнить
+                    </button>
+                    <button class="profile-btn" id="openProfile">
+                        <i class="fas fa-user"></i> Профиль
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Играйте и выигрывайте!</h2>
+                <p>Более 100 лицензионных игр, щедрые бонусы и мгновенные выплаты. Присоединяйтесь к миллионам игроков по всему миру!</p>
+                <div class="bonus-badge">
+                    <i class="fas fa-gift"></i> Бонус 100% на первый депозит!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section class="games-section">
+        <div class="container">
+            <h2 class="section-title">Популярные игры</h2>
+            <div class="games-grid">
+                <!-- Game 1 -->
+                <div class="game-card">
+                    <div class="game-image" style="background-image: url(static/gm_fon1.jpg);"></div>
+                    <div class="game-content">
+                        <h3 class="game-title">Слоты "3 подряд"</h3>
+                        <p class="game-description">Классические слоты, попробуй собрать в ряд</p>
+                        <button class="play-btn" onClick="window.location.href='/ruletka'">Играть сейчас</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeProfile">&times;</button>
+            <h2 class="modal-title">Мой профиль</h2>
+            
+            <div class="profile-info">
+                <div class="info-item">
+                    <span class="info-label">Игрок:</span>
+                    <span class="info-value" id="profileUsername">Иван_Игрок</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">почта:</span>
+                    <span class="info-value">---</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Баланс:</span>
+                    <span class="info-value" id="profileBalance">5 000 ₽</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Бонусы:</span>
+                    <span class="info-value">1 250 ₽</span>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value">---</div>
+                    <div class="stat-label">Сыграно игр</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">--- ₽</div>
+                    <div class="stat-label">Общий выигрыш</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">---</div>
+                    <div class="stat-label">Джекпоты</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">---%</div>
+                    <div class="stat-label">Процент побед</div>
+                </div>
+            </div>
+            
+            <button class="confirm-btn" onclick="window.location.href='/profile_go'">Редактировать профиль</button>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div class="modal" id="depositModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeDeposit">&times;</button>
+            <h2 class="modal-title">Пополнение счета</h2>
+            
+            <div class="deposit-options">
+                <div class="deposit-option" data-amount="500">
+                    <div class="deposit-amount">500 ₽</div>
+                    <div class="deposit-bonus">+50 ₽ бонус</div>
+                </div>
+                <div class="deposit-option" data-amount="1000">
+                    <div class="deposit-amount">1 000 ₽</div>
+                    <div class="deposit-bonus">+150 ₽ бонус</div>
+                </div>
+                <div class="deposit-option" data-amount="2000">
+                    <div class="deposit-amount">2 000 ₽</div>
+                    <div class="deposit-bonus">+400 ₽ бонус</div>
+                </div>
+                <div class="deposit-option" data-amount="5000">
+                    <div class="deposit-amount">5 000 ₽</div>
+                    <div class="deposit-bonus">+1 250 ₽ бонус</div>
+                </div>
+            </div>
+            
+            <div class="custom-amount">
+                <input type="number" id="customAmount" placeholder="Или введите свою сумму">
+            </div>
+            
+            <button class="confirm-btn" id="confirmDeposit">Пополнить</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <i class="fas fa-crown"></i>
+                    <h1>VICING CASINO</h1>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#">О нас</a>
+                    <a href="#">Правила</a>
+                    <a href="#">Поддержка</a>
+                    <a href="#">Бонусы</a>
+                    <a href="#">Ответственная игра</a>
+                </div>
+                
+                <div class="age-warning">
+                    <p>Только для лиц старше 18 лет. Азартные игры могут вызывать зависимость. Играйте ответственно.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Форматирование баланса
+        function formatBalance(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' ₽';
+        }
+
+        let balance = 0;
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            }
+
+            username = getCookie('name');
+            password = getCookie('password');
+            // Игровые переменные
+            fetch('/api/get_balance', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name: username, passwd: password }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    balance = data['balance']
+                    selectedDepositAmount = 0;
+                    userBalance.textContent = formatBalance(balance);
+                    profileBalance.textContent = formatBalance(balance);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    window.location.href = "/";
+                });
+                
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы DOM
+            const profileModal = document.getElementById('profileModal');
+            const depositModal = document.getElementById('depositModal');
+            const openProfileBtn = document.getElementById('openProfile');
+            const openDepositBtn = document.getElementById('openDeposit');
+            const closeProfileBtn = document.getElementById('closeProfile');
+            const closeDepositBtn = document.getElementById('closeDeposit');
+            const userBalance = document.getElementById('userBalance');
+            const profileBalance = document.getElementById('profileBalance');
+            const depositOptions = document.querySelectorAll('.deposit-option');
+            const customAmount = document.getElementById('customAmount');
+            const confirmDepositBtn = document.getElementById('confirmDeposit');
+            
+            let selectedDepositAmount = 0;
+            let currentBalance = balance;
+            userBalance.textContent = formatBalance(balance);
+            profileBalance.textContent = formatBalance(balance);
+            // Открытие модальных окон
+            openProfileBtn.addEventListener('click', () => {
+                profileModal.style.display = 'flex';
+            });
+            
+            openDepositBtn.addEventListener('click', () => {
+                depositModal.style.display = 'flex';
+            });
+            
+            // Закрытие модальных окон
+            closeProfileBtn.addEventListener('click', () => {
+                profileModal.style.display = 'none';
+            });
+            
+            closeDepositBtn.addEventListener('click', () => {
+                depositModal.style.display = 'none';
+            });
+            
+            // Закрытие по клику вне модального окна
+            window.addEventListener('click', (e) => {
+                if (e.target === profileModal) {
+                    profileModal.style.display = 'none';
+                }
+                if (e.target === depositModal) {
+                    depositModal.style.display = 'none';
+                }
+            });
+            
+            // Выбор суммы пополнения
+            depositOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Снимаем выделение со всех опций
+                    depositOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Выделяем выбранную опцию
+                    option.classList.add('selected');
+                    // Сохраняем выбранную сумму
+                    selectedDepositAmount = parseInt(option.getAttribute('data-amount'));
+                    // Очищаем поле произвольной суммы
+                    customAmount.value = '';
+                });
+            });
+            
+            // Обработка произвольной суммы
+            customAmount.addEventListener('input', () => {
+                if (customAmount.value) {
+                    // Снимаем выделение с фиксированных опций
+                    depositOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Сохраняем произвольную сумму
+                    selectedDepositAmount = parseInt(customAmount.value);
+                }
+            });
+            
+            // Подтверждение пополнения
+            confirmDepositBtn.addEventListener('click', () => {
+                if (selectedDepositAmount > 0) {
+                    // Обновляем баланс
+                    balance += selectedDepositAmount;
+                    userBalance.textContent = formatBalance(balance);
+                    profileBalance.textContent = formatBalance(balance);
+                    
+                    // Показываем сообщение об успехе
+                    alert(`Счет успешно пополнен на ${selectedDepositAmount} ₽!`);
+                    
+                    // Закрываем модальное окно
+                    depositModal.style.display = 'none';
+                    
+                    fetch('/api/save_balance', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name: username, passwd: password, bal: selectedDepositAmount}),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                            balance = data['balance']
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            window.location.href = "/";
+                        });
+                } else {
+                    alert('Пожалуйста, выберите или введите сумму для пополнения');
+                }
+
+                // Сбрасываем выбор
+                depositOptions.forEach(opt => opt.classList.remove('selected'));
+                customAmount.value = '';
+                selectedDepositAmount = 0;
+
+            });
+            
+            // Анимация появления карточек игр
+            const gameCards = document.querySelectorAll('.game-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            gameCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

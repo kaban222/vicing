@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игровой интерфейс</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(30, 30, 46, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #ff6b6b 0%, #ff8e53 100%);
+            padding: 15px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .bonus {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: #ffd166;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .stats {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: #a0a0c0;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            color: #ffd166;
+        }
+        
+        .win {
+            color: #4ecdc4;
+        }
+        
+        .total-win {
+            background: linear-gradient(90deg, #4ecdc4 0%, #44a08d 100%);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .total-win-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .total-win-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b 0%, #ff8e53 100%);
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .balance {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .balance-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffd166;
+        }
+        
+        .currency {
+            font-size: 16px;
+            color: #a0a0c0;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">ВЕЁР</div>
+            <div class="subtitle">ВОМАНZA</div>
+            <div class="bonus">БОНУС ФИТИВЕН</div>
+        </div>
+        
+        <div class="content">
+            <div class="stats">
+                <div class="stat-row">
+                    <div class="stat-label">Хабровик шлюз</div>
+                    <div class="stat-value">0,05 FUN</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Общая ставка</div>
+                    <div class="stat-value">0,20 FUN</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Выигрыш</div>
+                    <div class="stat-value win">0,60 FUN</div>
+                </div>
+            </div>
+            
+            <div class="total-win">
+                <div class="total-win-label">Общий выигрыш:</div>
+                <div class="total-win-value">10/10</div>
+            </div>
+            
+            <div class="progress">
+                <div class="progress-text">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">10</div>
+            </div>
+            
+            <div class="balance">
+                <div class="balance-label">Балвис</div>
+                <div class="balance-value">980,00<span class="currency">FUN</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Анимация заполнения прогресс-бара
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressFill = document.querySelector('.progress-fill');
+            setTimeout(() => {
+                progressFill.style.width = '100%';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
